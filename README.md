@@ -2,14 +2,8 @@
 
 A simple TCP server socket. 
 
-### multiProcess
+**multiProcess**: A server that can accept multiple client messages implemented by multi-process
 
-A server that can accept multiple client messages implemented by multi-process
+**multiPlexing**: selet, poll, epoll
 
-### multiPlexing
-
-selet, poll, epoll
-
-### ThreadPoll
-
-threadpoll + epoll
+**ThreadPoll**: threadpoll + epoll
