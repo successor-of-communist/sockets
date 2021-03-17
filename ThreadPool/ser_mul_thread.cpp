@@ -1,6 +1,5 @@
 #include "header.h"
 #include "Socket.h"
-#include "Error.h"
 #include "ThreadPool.h"
 
 #define EPOLL_MAX 2048
@@ -17,7 +16,7 @@ int main() {
     memset(&addr,0,sizeof(addr));
     addr.sin_family=AF_INET;
     addr.sin_addr.s_addr=htonl(INADDR_ANY);
-    addr.sin_port=htons(9876);
+    addr.sin_port=htons(9999);
     Bind(listenfd,(struct sockaddr*)&addr,sizeof(addr));
     Listen(listenfd,10);
 
@@ -46,8 +45,7 @@ int main() {
                 continue;
             }
             pthread_t threadid;
-            int arg=tmpev.data.fd;
-            Task *task=new Task();
+            Task *task=new Task(tmpev.data.fd,epollfd);
             pool.addTask(task);
         }
     }

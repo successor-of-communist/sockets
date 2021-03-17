@@ -1,9 +1,12 @@
-#ifndef __SOCKET_H
-#define __SOCKET_H
-#include<sys/socket.h>
-#include"Error.h"
+#ifndef __SOCKET_CPP
+#define __SOCKET_CPP
+#include"Socket.h"
+#include"header.h"
 #define SA struct sockaddr
-//report position of error and exit
+void Error(const char * s){
+        perror(s);
+        exit(1);
+    }
 int Socket(int domain,int type,int protocol){
 	int fd=socket(domain,type,protocol);
 	if(fd<0){
@@ -32,5 +35,17 @@ int Close(int socket){
 	else
 		Error("close");
 	return -1;
+}
+int Read(int files,void *buf,size_t len){
+	int l=read(files,buf,len);
+	if(l<0)
+		Error("read");
+	return l;
+}
+int Write(int files,const void* buf,size_t len){
+	int l=write(files,buf,len);
+	if(l<0)
+		Error("write");
+	return l;
 }
 #endif
